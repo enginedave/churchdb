@@ -1,1 +1,15 @@
 Church Database Webapp
+
+
+Reminder 
+When this code is cloned from GitHub it will not work until the following folders are created
+
+assets/
+protected/runtime/
+
+both of these need to be writeable by the web server using the following commands
+
+chmod 777 assets
+chmod 777 runtime
+
+
