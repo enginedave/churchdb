@@ -1,0 +1,19 @@
+master todo list
+
+progress with the design based on the 4 main tables 
+
+	district leaders
+	district
+	familys
+	people
+	
+	plus the look up tables.
+
+read chapter 6 of the book and see if it is better to de-couple the look up tables from the people table instead of having the database enforcing referential integrity. - it is important for the database to enforce this referencial integrity.
+
+determine how best and when to use the ON DELETE CASCADE setting for the database table.
+in terms of the table for district and district leaders i do not want a deletion of a district or the deletion of a district leader to delete a family entry - so ON DELETE CASCADE is not used. - done 25.08.2011
+
+InnoDB rejects any INSERT or UPDATE operation that attempts to create a foreign key value in a child table if there is no a matching candidate key value in the parent table. When an UPDATE or DELETE operation affects a key value in the parent table that has matching rows in the child table, the result depends on the referential action specified using ON UPDATE and ON DELETE subclauses of the FOREIGN KEY clause. InnoDB supports five options regarding the action to be taken. If ON DELETE or ON UPDATE are not specified, the default action is RESTRICT.
+
+change the fields within the tables from id_tbl_district to district_id. this will be treated by Yii better and will look better in the automatically generated code. done 24.08.2011

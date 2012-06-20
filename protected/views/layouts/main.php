@@ -28,9 +28,27 @@
 	<div id="mainmenu">
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
-				array('label'=>'Home', 'url'=>array('/site/index')),
+				//array('label'=>'Home', 'url'=>array('/site/index')),
+				
+				
+				//array('label'=>'Districts', 'url'=>array('district/index')),
+				//array('label'=>'DistrictLeaders', 'url'=>array('districtLeader/index')),
+				array('label'=>'Families', 'url'=>array('family/index'), 'visible'=>!Yii::app()->user->isGuest),
+				//array('label'=>'mar', 'url'=>array('maritalStatus/index')),
+				//array('label'=>'mem', 'url'=>array('membershipStatus/index')),
+				//array('label'=>'nxt', 'url'=>array('nextChurch/index')),
+				array('label'=>'People', 'url'=>array('people/index'), 'visible'=>!Yii::app()->user->isGuest),
+				//array('label'=>'pre', 'url'=>array('previousChurch/index')),
+				//array('label'=>'sal', 'url'=>array('salutation/index')),
+				//array('label'=>'sfx', 'url'=>array('suffix/index')),
+				array('label'=>'Teams', 'url'=>array('team/index'), 'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'Users', 'url'=>array('user/index'), 'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'Reports', 'url'=>array('site/page', 'view'=>'reports'), 'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'Admin', 'url'=>array('/site/page', 'view'=>'admin'), 'visible'=>!Yii::app()->user->isGuest),
 				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
+				
 				array('label'=>'Contact', 'url'=>array('/site/contact')),
+				
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
@@ -43,8 +61,6 @@
 	<?php endif?>
 
 	<?php echo $content; ?>
-
-	<div class="clear"></div>
 
 	<div id="footer">
 		Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>

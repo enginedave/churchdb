@@ -14,3 +14,19 @@
 the <a href="http://www.yiiframework.com/doc/">documentation</a>.
 Feel free to ask in the <a href="http://www.yiiframework.com/forum/">forum</a>,
 should you have any questions.</p>
+
+
+<?php if(!Yii::app()->user->isGuest): ?>
+<p>
+You last logged in on <?php echo date ('l, F d, Y, g:i a', Yii::app()->user->lastLoginTime); ?>
+</p>
+<?php endif; ?>
+
+<?php 
+
+if(!Yii::app()->user->isGuest)
+{
+	echo '<p>You last logged in on '.date ('l, F d, Y, g:i a', Yii::app()->user->lastLoginTime).'</p>';
+} 
+
+?>
