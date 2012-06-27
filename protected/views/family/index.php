@@ -64,6 +64,10 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'id'=>'family-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
+	
+	//this cssFile ref does not seem to work!
+	/*href="<?php echo Yii::app()->theme->baseUrl; ?>/css/main.css" />				*/
+	//'cssFile' =>  '/css/gridview/style.css',
 	'columns'=>array(
 		//'id',
 		
