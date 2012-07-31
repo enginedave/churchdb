@@ -1,4 +1,13 @@
-.grid-view-loading
+
+/*this style sheet has been largely commented out to force the page to be styled by the bootstrap css files*/
+
+thead th {background: #ffffff;}
+
+
+
+
+
+/*.grid-view-loading
 {
 	background:url(loading.gif) no-repeat;
 }
@@ -117,4 +126,4 @@
 {
 	width: 100%;
 	border: 1px solid #ccc;
-}
+}*/

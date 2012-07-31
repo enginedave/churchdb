@@ -10,7 +10,10 @@ return array(
 	'name'=>'Church Membership Management',
 
 	// preloading 'log' component
-	'preload'=>array('log'),
+	'preload'=>array(
+		'log',
+		'bootstrap',  //this is added for the bootstrap extension
+		),
 
 	// autoloading model and component classes
 	'import'=>array(
@@ -26,6 +29,9 @@ return array(
 			'password'=>'password',
 		 	// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1'),
+			'generatorPaths'=>array(  //added for the bootstrap extension
+				'bootstrap.gii',   //added for the bootstrap extension
+			),
 		),
 		
 	),
@@ -35,6 +41,10 @@ return array(
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
+		),
+
+		'bootstrap'=>array(
+			'class'=>'ext.bootstrap.components.Bootstrap',  //bootstrap extension
 		),
 		// uncomment the following to enable URLs in path-format
 		/*

@@ -22,7 +22,7 @@ a:hover {
 #page
 {
 	margin-top: px;
-	margin-bottom: 5px;
+	margin-bottom: 0px;
 	background: white;
 	border: 0px solid #C9E0ED;
 }
@@ -37,7 +37,7 @@ a:hover {
 
 #content
 {
-    padding: 20px;
+    padding: 0px;
 
 }
 
@@ -51,12 +51,12 @@ a:hover {
 #footer
 {
 	padding: 20px;
-	margin: 10px 0px;
-	font-size: 0.8em;
+	margin: 10px 0px 0px 0px;
+	font-size: 1.0em;
 	text-align: center;
-	border-top: 2px solid #dd0c0d;
-	color: #555;
-	background: #f7f7f7;
+	border-top: 2px solid #54a954;
+	color: #999;
+	background: #2c2c2c;
 }
 
 #logo
@@ -302,7 +302,8 @@ div.search-form
 	color: #fff;
 }
 
-
+/*this closes up the spacing of the cells for the advanced search form making it a little smaller*/
+th, td, caption {padding:0px 0px 0px 0px;}
 
 
 
