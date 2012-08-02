@@ -1,15 +1,29 @@
 
-<?php
 
-$this->widget('bootstrap.widgets.BootButtonGroup', array(
+
+<?php $this->widget('bootstrap.widgets.TbButtonGroup', array(
     'buttons'=>array(
-        array('label'=>'Create Family', 'url'=>array('create'), 'type'=>'success', 'size'=>'mini', 'htmlOptions'=>array('style'=>'float: right;')),
-		//array('label'=>'List Family', 'url'=>array('index'), 'type'=>'danger', 'size'=>'mini'),
+        array('label'=>'Create Family', 'url'=>array('create')),
+        //array('label'=>'another button', 'url'=>'#'),
+        //array('label'=>'another button', 'url'=>'#'),
     ),
-	));
+    'htmlOptions'=>array('style'=>'float: right;'),
+    'type'=>'success',
+    'size'=>'small',    
+)); ?>
 
 
-?>
+
+
+
+
+
+
+
+
+
+
+
 
 <?php
 
@@ -67,7 +81,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 
 
 
-<?php $this->widget('bootstrap.widgets.BootGridView', array(
+<?php $this->widget('bootstrap.widgets.TbGridView', array(
 	'id'=>'family-grid',
     'type'=>'bordered striped condensed',
     'dataProvider'=>$model->search(),
@@ -81,7 +95,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
         array('name'=>'telephone', 'header'=>'Tel'),
 		array('name'=>'district.district_name', 'header'=>'District'),
         array(
-            'class'=>'bootstrap.widgets.BootButtonColumn',
+            'class'=>'bootstrap.widgets.TbButtonColumn',
 			'template'=>'{update}{view}',
             'htmlOptions'=>array('style'=>'width: 50px'),
         ),

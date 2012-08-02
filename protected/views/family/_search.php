@@ -1,6 +1,6 @@
 <div class="wide form">
 
-<?php $form=$this->beginWidget('bootstrap.widgets.BootActiveForm', array(
+<?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 	'action'=>Yii::app()->createUrl($this->route),
 	'method'=>'get',
 	'id'=>'verticalForm',
@@ -57,7 +57,7 @@
 			<td>
 				
 					<?php //echo CHtml::submitButton('Search'); ?>
-					<?php $this->widget('bootstrap.widgets.BootButton', array('buttonType'=>'submit', 'icon'=>'search', 'label'=>'Search')); ?>
+					<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'icon'=>'search', 'label'=>'Search')); ?>
 				
 			</td>
 			<td><?php echo $form->label($model,'country'); ?></td>
