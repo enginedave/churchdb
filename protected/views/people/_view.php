@@ -1,4 +1,4 @@
-<div class="view">
+<div class="view row">
 
 	<!--format of the name
 	<!--Mr Joe Barney Blogs Jnr (nickey) (age:56) (Member)   -->
@@ -7,14 +7,32 @@
 	<?php //echo CHtml::encode($data->first_name).' '; ?>
 	<?php //echo CHtml::encode($data->middle_name).' '; ?>
 	<?php //echo CHtml::encode($data->family->family_name).' '; ?>
-	<?php echo CHtml::link(CHtml::encode($data->salutation->salutation.' '.$data->first_name.' '.$data->middle_name.' '.$data->family->family_name), array('people/view', 'id'=>$data->id)); ?>
+
+
+
 	
-	<?php echo CHtml::encode('Tel: '.$data->mobile_number).' '; ?>
-	<?php echo CHtml::encode('Email:'.$data->email_address1).' '; ?>
+<div class="span2">	
+	<?php echo CHtml::link(CHtml::encode($data->salutation->salutation.' '.$data->first_name.' '.$data->family->family_name), array('people/view', 'id'=>$data->id)); ?>
+	
+</div>
+
+<div class="span1">
+<?php echo CHtml::encode('('.$data->membershipStatus->membership_type.')'); ?>
+</div>
+
+<div class="span2">
+	<?php echo CHtml::encode('T: '.$data->mobile_number).' '; ?>
+</div>	
+
+<div class="span3">
+	<?php echo CHtml::encode('E:'.$data->email_address1).' '; ?>
+</div>
+<div class="span1">
 	<?php echo CHtml::encode('Age:'.$data->date_of_birth); ?>
-	<?php echo CHtml::encode($data->membershipStatus->membership_type); ?>
-	<?php echo CHtml::encode($data->maritalStatus->marital_status_type); ?>
-	
+	</div>
+	<div class="span2">
+	<?php echo CHtml::encode('('.$data->maritalStatus->marital_status_type.')'); ?>
+	</div>
 	
 
 	

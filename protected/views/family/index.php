@@ -87,7 +87,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
     'dataProvider'=>$model->search(),
     'template'=>"{summary}{items}{pager}",
 	'filter'=>$model,
-	'cssFile' => Yii::app()->theme->baseUrl.'/css/gridview/styles.css',
+	//'cssFile' => Yii::app()->theme->baseUrl.'/css/gridview/styles.css',
     'columns'=>array(
         array('name'=>'family_name', 'header'=>'Family Name'),
         array('name'=>'house_number', 'header'=>'No', 'htmlOptions'=>array('style'=>'width: 75px; text-align: right;')),
