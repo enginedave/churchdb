@@ -12,7 +12,12 @@ return array(
 	// preloading 'log' component
 	'preload'=>array(
 		'log',
-		'bootstrap',  //this is added for the bootstrap extension
+		php_sapi_name() !== 'cli'
+		?  'bootstrap'
+		: '',
+		  //this is added for the bootstrap extension
+		  //https://bitbucket.org/Crisu83/yii-bootstrap/issue/16/unit-testing-broken-due-to-wrong-assets
+		  //this is a workaround because the bootstrap extension breaks the unit testing
 		),
 
 	// autoloading model and component classes

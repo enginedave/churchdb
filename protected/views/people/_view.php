@@ -25,10 +25,11 @@
 </div>	
 
 <div class="span3">
-	<?php echo CHtml::encode('E:'.$data->email_address1).' '; ?>
+	<?php echo CHtml::encode('E: '.$data->email_address1).' '; ?>
 </div>
 <div class="span1">
-	<?php echo CHtml::encode('Age:'.$data->date_of_birth); ?>
+	<?php //echo CHtml::encode('Age:'.$data->date_of_birth); ?>
+	<?php echo CHtml::encode('Age: '.$data->getAgeOfPerson()); ?>
 	</div>
 	<div class="span2">
 	<?php echo CHtml::encode('('.$data->maritalStatus->marital_status_type.')'); ?>

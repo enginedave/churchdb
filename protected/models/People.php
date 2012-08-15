@@ -62,6 +62,7 @@ class People extends ChurchDbActiveRecord
 	const GIFT_AID_NO=0;
 	const GIFT_AID_YES=1;
 	
+	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return People the static model class
@@ -207,6 +208,43 @@ class People extends ChurchDbActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	public function getAgeOfPerson()
+	{
+		//need to calculate the age of the person based
+		//on their date of birth
+		
+		$age = '--'; // initialise the age and set to -- if date_of_birth is NULL
+		if(!$this->date_of_birth==NULL)
+		{ 
+			//get the current year, month, and day
+			$nowYear = date('Y');
+			$nowMonth = date('m');
+			$nowDay = date('d');
+			//extract the year month and day from the persons DOB
+			$dobYear = substr($this->date_of_birth, 6, 4);
+			$dobMonth = substr($this->date_of_birth, 3, 2);
+			$dobDay = substr($this->date_of_birth, 0, 2);
+			//age will be simply the diff in years if the persons 
+			//birthday has passed
+			$yearDiff = $nowYear - $dobYear;
+			$age = $yearDiff;
+			
+			//test for months if not yet their birth month 
+			//subtract a year
+			if($dobMonth > $nowMonth) $age = $yearDiff - 1;
+			
+			//if within birth month test for day if not yet their
+			//birth day then subtract year from age
+			if($dobMonth == $nowMonth) 
+			{
+				if($dobDay > $nowDay) $age = $yearDiff - 1;
+			}
+		}
+				
+		//return age as calculated in years
+		return $age;
 	}
 	
 	public function getGenderText()
