@@ -1,30 +1,3 @@
-
-
-
-<?php $this->widget('bootstrap.widgets.TbButtonGroup', array(
-    'buttons'=>array(
-        array('label'=>'Create Family', 'url'=>array('create')),
-        //array('label'=>'another button', 'url'=>'#'),
-        //array('label'=>'another button', 'url'=>'#'),
-    ),
-    'htmlOptions'=>array('style'=>'float: right;'),
-    'type'=>'success',
-    'size'=>'small',    
-)); ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <?php
 
 
@@ -52,6 +25,30 @@
 	");
 
 ?>
+
+
+
+
+
+<?php $this->widget('bootstrap.widgets.TbButtonGroup', array(
+    'buttons'=>array(
+        array('label'=>'Create Family', 'url'=>array('create')),
+        //array('label'=>'another button', 'url'=>'#'),
+        //array('label'=>'another button', 'url'=>'#'),
+    ),
+    'htmlOptions'=>array('style'=>'float: right;'),
+    'type'=>'success',
+    'size'=>'small',    
+)); ?>
+
+
+
+
+
+
+
+
+
 
 <h1>List of Familys</h1>
 

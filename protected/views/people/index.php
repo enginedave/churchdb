@@ -1,25 +1,4 @@
-<?php
 
-// this section is the original index section
-/*
-$this->breadcrumbs=array(
-	'Peoples',
-);
-
-$this->menu=array(
-	array('label'=>'Create People', 'url'=>array('create')),
-	array('label'=>'Manage People', 'url'=>array('admin')),
-);
-?>
-
-<h1>Peoples</h1>
-
-<?php $this->widget('zii.widgets.CListView', array(
-	'dataProvider'=>$dataProvider,
-	'itemView'=>'_view',
-)); */
-
-?>
 
 <?php
 $this->breadcrumbs=array(
@@ -27,10 +6,10 @@ $this->breadcrumbs=array(
 	'Manage',
 );
 
-$this->menu=array(
-	array('label'=>'List People', 'url'=>array('index')),
+//$this->menu=array(
+	//array('label'=>'List People', 'url'=>array('index')),
 	//array('label'=>'Create People', 'url'=>array('create')),
-);
+//);
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
@@ -46,6 +25,36 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <h1>List of  People</h1>
 
 <p>
@@ -60,9 +69,11 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 )); ?>
 </div><!-- search-form -->
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
+<?php $this->widget('bootstrap.widgets.TbGridView', array(
 	'id'=>'people-grid',
+	'type'=>'bordered striped condensed',
 	'dataProvider'=>$model->search(),
+	'template'=>"{summary}{items}{pager}",
 	'filter'=>$model,
 	'columns'=>array(
 		//'id',
@@ -103,8 +114,10 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'update_user_id',
 		*/
 		array(
-			'class'=>'CButtonColumn',
+			//'class'=>'CButtonColumn',
+			'class'=>'bootstrap.widgets.TbButtonColumn',
 			'template'=>'{update}{view}',
+			'htmlOptions'=>array('style'=>'width: 50px'),
 		),
 	),
 )); ?>
