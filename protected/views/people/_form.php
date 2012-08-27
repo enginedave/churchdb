@@ -1,38 +1,84 @@
 <div class="form">
 
-<?php $form=$this->beginWidget('CActiveForm', array(
+<?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 	'id'=>'people-form',
 	'enableAjaxValidation'=>false,
+	
+	
+	'id'=>'verticalForm',
+	'htmlOptions'=>array('class'=>'well'),
 )); ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
+<div class="row">
 		<?php //echo $form->labelEx($model,'family_id'); ?>
 		<?php //echo $form->textField($model,'family_id'); ?>
 		<?php //echo $form->dropDownList($model,'family_id', CHtml::listData(Family::model()->findAll(), 'id', 'family_name')); ?>
 		<?php //echo $form->error($model,'family_id'); ?>
 		<?php echo $form->hiddenField($model,'family_id'); ?>
-	</div>
+</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'salutation_id'); ?>
+
+<div class="row">
+	<div class="span3 offset2">First Name</div>
+	<div class="span3">Middle Name</div>
+	<div class="span2">Surname</div>
+</div>
+
+
+
+<div class="row">
+	<div class="span2"><?php echo $form->dropDownList($model,'salutation_id', CHtml::listData(Salutation::model()->findAll(), 'id', 'salutation'), array('style'=>'width: 120px;')); ?></div>
+	<div class="span3"><?php echo $form->textField($model,'first_name',array('size'=>60,'maxlength'=>100)); ?></div>
+	<div class="span3"><?php echo $form->textField($model,'first_name',array('size'=>60,'maxlength'=>100)); ?></div>
+	<div class="span2"><?php echo $form->textField($model,'first_name',array('size'=>60,'maxlength'=>100)); ?></div>
+</div>
+
+<div class="row">
+	<div class="span3 offset5">Alternate Last Name</div>
+	<div class="span3"><?php echo $form->textField($model,'first_name',array('size'=>60,'maxlength'=>100)); ?></div>
+	
+</div>
+
+<div class="row">
+	<div class="span3 offset5">Maiden Name</div>
+	<div class="span3"><?php echo $form->textField($model,'first_name',array('size'=>60,'maxlength'=>100)); ?></div>
+	
+</div>
+
+
+<div class="row">
+	
+	<div class="span2"></div>
+	<div class="span2"><?php echo $form->textField($model,'first_name',array('size'=>60,'maxlength'=>100)); ?></div>
+	<div class="span2"></div>
+	<div class="span3"></div>	
+	
+	
+	
+		
 		<?php //echo $form->textField($model,'salutation_id'); ?>
-		<?php echo $form->dropDownList($model,'salutation_id', CHtml::listData(Salutation::model()->findAll(), 'id', 'salutation')); ?>
+		
 		<?php echo $form->error($model,'salutation_id'); ?>
-	</div>
+
+
+</div>
+
+
+
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'first_name'); ?>
-		<?php echo $form->textField($model,'first_name',array('size'=>60,'maxlength'=>100)); ?>
+		
 		<?php echo $form->error($model,'first_name'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'middle_name'); ?>
-		<?php echo $form->textField($model,'middle_name',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo $form->textField($model,'middle_name',array('size'=>60,'maxlength'=>200)); ?>
 		<?php echo $form->error($model,'middle_name'); ?>
 	</div>
 
