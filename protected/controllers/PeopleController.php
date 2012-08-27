@@ -82,7 +82,9 @@ class PeopleController extends Controller
 	 */
 	public function actionCreate()
 	{
-		//need to add ability to store 
+		//need to add ability to store the family model and pass this to the
+		//create so that the family name can be displayed in the form for the 
+		//new family member. 
 		
 		$model=new People;
 		
