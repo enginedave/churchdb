@@ -53,7 +53,7 @@
 <div class="row">
 	
 	<div class="span2"></div>
-	<div class="span2"><?php echo $form->textField($model,'first_name',array('size'=>60,'maxlength'=>100)); ?></div>
+	<div class="span2">The Family Name</div>
 	<div class="span2"></div>
 	<div class="span3"></div>	
 	
