@@ -23,18 +23,19 @@
 
 
 <div class="row">
-	<div class="span3 offset2">First Name</div>
-	<div class="span3">Middle Name</div>
-	<div class="span2">Surname</div>
+	<div class="span3 offset2"><?php echo $form->labelEx($model,'first_name'); ?></div>
+	<div class="span3"><?php echo $form->labelEx($model,'middle_name'); ?></div>
+	<div class="span2">Family Name</div>
 </div>
 
 
 
 <div class="row">
 	<div class="span2"><?php echo $form->dropDownList($model,'salutation_id', CHtml::listData(Salutation::model()->findAll(), 'id', 'salutation'), array('style'=>'width: 120px;')); ?></div>
-	<div class="span3"><?php echo $form->textField($model,'first_name',array('size'=>60,'maxlength'=>100)); ?></div>
-	<div class="span3"><?php echo $form->textField($model,'first_name',array('size'=>60,'maxlength'=>100)); ?></div>
-	<div class="span2"><?php echo $form->textField($model,'first_name',array('size'=>60,'maxlength'=>100)); ?></div>
+	<div class="span2"><?php echo $form->textField($model,'first_name',array('size'=>6,'maxlength'=>10,'style'=>'width: 80px;')); ?></div>
+	<div class="span2"><?php echo $form->textField($model,'middle_name',array('size'=>60,'maxlength'=>200,'style'=>'width: 80px;')); ?></div>
+	<div class="span2"><?php echo $form->textField($model,'family_id',array('size'=>60,'maxlength'=>100, 'disabled'=>true,'style'=>'width: 80px;')); ?></div>
+	<div class="span2"><?php echo $form->dropDownList($model,'suffix_id', CHtml::listData(Suffix::model()->findAll(), 'id', 'suffix'), array('style'=>'width: 40px;')); ?></div>
 </div>
 
 <div class="row">
