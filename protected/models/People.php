@@ -129,7 +129,7 @@ class People extends ChurchDbActiveRecord
 			'salutation_id' => 'Salutation',
 			'first_name' => 'First Name',
 			'middle_name' => 'Middle Name',
-			'last_name' => 'Last Name',
+			'last_name' => 'Last Name (Alt)',
 			'maiden_name' => 'Maiden Name',
 			'suffix_id' => 'Suffix',
 			'nick_name' => 'Nick Name',

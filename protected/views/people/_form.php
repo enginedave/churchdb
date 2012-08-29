@@ -4,7 +4,7 @@
 	'id'=>'people-form',
 	'enableAjaxValidation'=>false,
 	
-	
+	'type'=>'horizontal',
 	'id'=>'verticalForm',
 	'htmlOptions'=>array('class'=>'well'),
 )); ?>
@@ -21,130 +21,84 @@
 		<?php echo $form->hiddenField($model,'family_id'); ?>
 </div>
 
+<!--  
+// start of the main form 
+-->
 
 <div class="row">
-	<div class="span3 offset2"><?php echo $form->labelEx($model,'first_name'); ?></div>
-	<div class="span3"><?php echo $form->labelEx($model,'middle_name'); ?></div>
-	<div class="span2">Family Name</div>
-</div>
-
-
-
-<div class="row">
-	<div class="span2"><?php echo $form->dropDownList($model,'salutation_id', CHtml::listData(Salutation::model()->findAll(), 'id', 'salutation'), array('style'=>'width: 120px;')); ?></div>
-	<div class="span2"><?php echo $form->textField($model,'first_name',array('size'=>6,'maxlength'=>10,'style'=>'width: 80px;')); ?></div>
-	<div class="span2"><?php echo $form->textField($model,'middle_name',array('size'=>60,'maxlength'=>200,'style'=>'width: 80px;')); ?></div>
-	<div class="span2"><?php echo $form->textField($model,'family_id',array('size'=>60,'maxlength'=>100, 'disabled'=>true,'style'=>'width: 80px;')); ?></div>
-	<div class="span2"><?php echo $form->dropDownList($model,'suffix_id', CHtml::listData(Suffix::model()->findAll(), 'id', 'suffix'), array('style'=>'width: 40px;')); ?></div>
+	<div class="span2 offset2"><?php echo $form->labelEx($model,'first_name'); ?></div>
+	<div class="span2"><?php echo $form->labelEx($model,'middle_name'); ?></div>
+	<div class="span3">Family Name</div>
 </div>
 
 <div class="row">
-	<div class="span3 offset5">Alternate Last Name</div>
-	<div class="span3"><?php echo $form->textField($model,'first_name',array('size'=>60,'maxlength'=>100)); ?></div>
+	<div class="span2"><p class="pull-right"><?php echo $form->dropDownList($model,'salutation_id', CHtml::listData(Salutation::model()->findAll(), 'id', 'salutation'), array('style'=>'width: 90px;')); ?></p></div>
+	<div class="span2"><?php echo $form->textField($model,'first_name',array('size'=>60,'maxlength'=>100,'style'=>'width: 130px;')); ?></div>
+	<div class="span2"><?php echo $form->textField($model,'middle_name',array('size'=>60,'maxlength'=>100,'style'=>'width: 130px;')); ?></div>
+	<div class="span2"><?php echo $form->textField($model,'family_id',array('size'=>60,'maxlength'=>100, 'disabled'=>true,'style'=>'width: 130px;')); ?></div>
+	<div class="span2"><?php echo $form->dropDownList($model,'suffix_id', CHtml::listData(Suffix::model()->findAll(), 'id', 'suffix'), array('style'=>'width: 80px;')); ?></div>
+</div>
+
+<div class="row">
+	<div class="span2 offset4"><p class="pull-right"><?php echo $form->labelEx($model,'last_name'); ?></p></div>
+	<div class="span2"><?php echo $form->textField($model,'last_name',array('size'=>60,'maxlength'=>100,'style'=>'width: 130px;')); ?></div>
+</div>
+
+<div class="row">
+	<div class="span2 offset4"><p class="pull-right"><?php echo $form->labelEx($model,'maiden_name'); ?></p></div>
+	<div class="span2"><?php echo $form->textField($model,'maiden_name',array('size'=>60,'maxlength'=>100,'style'=>'width: 130px;')); ?></div>
 	
 </div>
 
 <div class="row">
-	<div class="span3 offset5">Maiden Name</div>
-	<div class="span3"><?php echo $form->textField($model,'first_name',array('size'=>60,'maxlength'=>100)); ?></div>
+	<div class="span2 offset4"><p class="pull-right"><?php echo $form->labelEx($model,'nick_name'); ?></p></div>
+	<div class="span2"><?php echo $form->textField($model,'nick_name',array('size'=>60,'maxlength'=>100,'style'=>'width: 130px;')); ?></div>
+</div>
+
+<div class="row">
+	<div class="span1 offset1"><?php echo $form->labelEx($model,'head_of_house'); ?></div>
+	<div class="span2"><?php echo $form->checkBox($model,'head_of_house'); ?></div>
+	<div class="span2"><p class="pull-right"><?php echo $form->labelEx($model,'gender'); ?></p></div>
+	<div class="span2"><?php echo $form->radioButtonList($model,'gender',(array(0=>'Female', 1=>'Male'))); ?></div>
 	
 </div>
 
+<hr/>
+
+<!--  
+// start of the contact information for the person
+-->
 
 <div class="row">
-	
+	<div class="span2"><p class="pull-right"><?php echo $form->labelEx($model,'mobile_number'); ?></p></div>
+	<div class="span2"><?php echo $form->textField($model,'mobile_number',array('size'=>30,'maxlength'=>30,'style'=>'width: 130px;')); ?></div>
+	<div class="span2"><p class="pull-right"><?php echo $form->labelEx($model,'email_address1'); ?></p></div>
+	<div class="span2"><?php echo $form->textField($model,'email_address1',array('size'=>60,'maxlength'=>100,'style'=>'width: 200px;')); ?></div>
+</div>
+
+<div class="row">
+	<div class="span2"><p class="pull-right"><?php echo $form->labelEx($model,'work_number'); ?></p></div>
+	<div class="span2"><?php echo $form->textField($model,'work_number',array('size'=>30,'maxlength'=>30,'style'=>'width: 130px;')); ?></div>
+	<div class="span2"><p class="pull-right"><?php echo $form->labelEx($model,'email_address2'); ?></p></div>
+	<div class="span2"><?php echo $form->textField($model,'email_address2',array('size'=>60,'maxlength'=>100,'style'=>'width: 200px;')); ?></div>
+</div>
+
+<hr/>
+
+
+<hr/>
+
+<div class="row">
 	<div class="span2"></div>
-	<div class="span2">The Family Name</div>
 	<div class="span2"></div>
-	<div class="span3"></div>	
-	
-	
-	
-		
-		<?php //echo $form->textField($model,'salutation_id'); ?>
-		
-		<?php echo $form->error($model,'salutation_id'); ?>
-
-
+	<div class="span3"></div>
+	<div class="span3"></div>
 </div>
 
 
+<hr/>
 
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'first_name'); ?>
-		
-		<?php echo $form->error($model,'first_name'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'middle_name'); ?>
-		<?php echo $form->textField($model,'middle_name',array('size'=>60,'maxlength'=>200)); ?>
-		<?php echo $form->error($model,'middle_name'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'last_name'); ?>
-		<?php echo $form->textField($model,'last_name',array('size'=>60,'maxlength'=>100)); ?>
-		<?php echo $form->error($model,'last_name'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'maiden_name'); ?>
-		<?php echo $form->textField($model,'maiden_name',array('size'=>60,'maxlength'=>100)); ?>
-		<?php echo $form->error($model,'maiden_name'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'suffix_id'); ?>
-		<?php //echo $form->textField($model,'suffix_id'); ?>
-		<?php echo $form->dropDownList($model,'suffix_id', CHtml::listData(Suffix::model()->findAll(), 'id', 'suffix')); ?>
-		<?php echo $form->error($model,'suffix_id'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'nick_name'); ?>
-		<?php echo $form->textField($model,'nick_name',array('size'=>60,'maxlength'=>100)); ?>
-		<?php echo $form->error($model,'nick_name'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'mobile_number'); ?>
-		<?php echo $form->textField($model,'mobile_number',array('size'=>30,'maxlength'=>30)); ?>
-		<?php echo $form->error($model,'mobile_number'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'work_number'); ?>
-		<?php echo $form->textField($model,'work_number',array('size'=>30,'maxlength'=>30)); ?>
-		<?php echo $form->error($model,'work_number'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'email_address1'); ?>
-		<?php echo $form->textField($model,'email_address1',array('size'=>60,'maxlength'=>100)); ?>
-		<?php echo $form->error($model,'email_address1'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'email_address2'); ?>
-		<?php echo $form->textField($model,'email_address2',array('size'=>60,'maxlength'=>100)); ?>
-		<?php echo $form->error($model,'email_address2'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'gender'); ?>
-		<?php //echo $form->textField($model,'gender'); ?>
-		<?php echo $form->radioButtonList($model,'gender',(array(0=>'Female', 1=>'Male'))); ?>
-		<?php //echo $form->checkBoxList($model,'gender',(array('Male'=>0, 'Female'=>1))); ?>
-		<?php echo $form->error($model,'gender'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'head_of_house'); ?>
-		<?php echo $form->checkBox($model,'head_of_house'); ?>
-		<?php echo $form->error($model,'head_of_house'); ?>
-	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'date_of_birth'); ?>
@@ -362,6 +316,17 @@
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>
+	
+	 <div class="form-actions"> 
+        <?php $this->widget('bootstrap.widgets.TbButton', array( 
+            'buttonType'=>'submit', 
+            'type'=>'primary', 
+            'label'=>$model->isNewRecord ? 'Create' : 'Save', 
+        )); ?>
+    </div> 
+	
+	
+	
 
 <?php $this->endWidget(); ?>
 
