@@ -68,13 +68,19 @@
 
 	<div class="span3 offset2">
 			<?php //echo CHtml::submitButton('Search'); ?>
-			<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'icon'=>'ok', 'label'=>'Save')); ?>
+			<?php //$this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'icon'=>'ok', 'label'=>'Save')); ?>
 	</div>
-	<div class="span2"><?php echo $form->labelEx($model,'country'); ?></div>
+	<div class="span2 offset5"><?php echo $form->labelEx($model,'country'); ?></div>
 	<div class="span3"><?php echo $form->textField($model,'country',array('size'=>60,'maxlength'=>100)); ?></div>
 </div>
 
-
+<div class="form-actions"> 
+    <?php $this->widget('bootstrap.widgets.TbButton', array( 
+        'buttonType'=>'submit', 
+        'type'=>'primary', 
+        'label'=>$model->isNewRecord ? 'Create' : 'Save', 
+    )); ?>
+</div> 
 
 
 
