@@ -41,29 +41,87 @@
 
 	</div>-->
 
-<div id="topadminmenu">
+
+
+
 <?php $this->widget('bootstrap.widgets.TbNavbar', array(
-	'type'=>'inverse',
-    'fixed'=>false,
+    'type'=>'inverse', // null or 'inverse'
+    //'fixed'=>false,
     'brand'=>'ChurchDB',
     'brandUrl'=>'#',
     'collapse'=>true, // requires bootstrap-responsive.css
     'items'=>array(
         array(
             'class'=>'bootstrap.widgets.TbMenu',
+            'htmlOptions'=>array('class'=>'pull-right'),
             'items'=>array(
-				array('label'=>'Users', 'url'=>array('user/index'), 'visible'=>!Yii::app()->user->isGuest),
-				array('label'=>'Admin', 'url'=>array('/site/page', 'view'=>'admin'), 'visible'=>!Yii::app()->user->isGuest),
+                //array('label'=>'Home', 'url'=>array('/family/index'), 'active'=>true),
+                array('label'=>'Users', 'url'=>array('user/index'), 'visible'=>!Yii::app()->user->isGuest),
+                array('label'=>'Admin', 'url'=>array('/site/page', 'view'=>'admin'), 'visible'=>!Yii::app()->user->isGuest),
 				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
 				array('label'=>'Contact', 'url'=>array('/site/contact')),
-				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest),       
-                			)
-				),
-            		),
-    	)
-    ); ?>
-</div>
+                array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest),
+                
+                
+                
+                
+                
+                
+                array('label'=>'Drop', 'url'=>'#', 'items'=>array(
+                    array('label'=>'Action', 'url'=>'#'),
+                    array('label'=>'Another action', 'url'=>'#'),
+                    array('label'=>'Something else here', 'url'=>'#'),
+                    '---',
+                    array('label'=>'NAV HEADER'),
+                    array('label'=>'Separated link', 'url'=>'#'),
+                    array('label'=>'One more separated link', 'url'=>'#'),
+                )),
+            ),
+        ),
+        /*'<form class="navbar-search pull-left" action=""><input type="text" class="search-query span2" placeholder="Search"></form>',
+        array(
+            'class'=>'bootstrap.widgets.TbMenu',
+            'htmlOptions'=>array('class'=>'pull-right'),
+            'items'=>array(
+                array('label'=>'Link', 'url'=>'#'),
+                '---',
+                array('label'=>'Dropdown', 'url'=>'#', 'items'=>array(
+                    array('label'=>'Action', 'url'=>'#'),
+                    array('label'=>'Another action', 'url'=>'#'),
+                    array('label'=>'Something else here', 'url'=>'#'),
+                    '---',
+                    array('label'=>'Separated link', 'url'=>'#'),
+                )),
+            ),
+        ),*/
+    ),
+)); ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -155,7 +213,7 @@
 	
 
 <div id="footer1">
-<div class="navbar navbar-inverse">
+<div class="navbar navbar">
   <div class="navbar-inner">
     <div class="container">
       <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"></a><a href="#" class="brand">ChurchDB</a>

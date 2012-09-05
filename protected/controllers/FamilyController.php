@@ -70,6 +70,15 @@ class FamilyController extends Controller
 	 */
 	public function actionView($id)
 	{
+		//get the name of the DistrictLeader for this family 
+		//$sqla = "SELECT district_id FROM tbl_family WHERE tbl_family.id=$id";
+		//$rowa = Yii::app()->db->createCommand($sqla)->queryAll();
+		//$sqlb = "SELECT district_leaders_id FROM tbl_district WHERE tbl_district.id=$rowa";
+		//$sql = "SELECT name FROM tbl_district_leader WHERE tbl_district_leader.id=2";
+		//$row = Yii::app()->db->createCommand($sql)->queryAll();
+		//$dlDataProvider = new CArrayDataProvider($row);
+		
+		//get the people associated with this family
 		$peopleDataProvider = new CActiveDataProvider('People', array
 		(
 			'criteria'=>array
@@ -90,9 +99,11 @@ class FamilyController extends Controller
 				),
 		)
 		);
+			
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 			'peopleDataProvider'=>$peopleDataProvider,
+			//'dlDataProvider'=>$dlDataProvider,		
 		));
 	}
 

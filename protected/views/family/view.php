@@ -65,29 +65,26 @@ $this->widget('bootstrap.widgets.TbButtonGroup', array(
 	<div class="span4">
 		<h3>Other Info</h3>
 		<?php $this->widget('bootstrap.widgets.TbDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'id',
-		//'family_name',
-		//'house_name',
-		//'house_number',
-		//'address_line1',
-		//'address_line2',
-		//'city',
-		//'region',
-		//'postcode',
-		//'country',
-		'telephone',
-		'district.district_name',	//previously 'district_id'
-		'district.district_leaders_id',
-		//'district.district_leaders_id.name',
-		//'create_time',
-		//'create_user_id',
-		//'update_time',
-		//'update_user_id',
-	),
-)); ?>
+			'data'=>$model,
+			'attributes'=>array(
+			//'id',
+			'telephone',
+			'district.district_name',
+			//'district.district_leaders_id',
+			//'district.notes',
+			array(
+					'label'=>'District Leader',
+					'value'=> $model->district->districtLeaders->name
+				),
+			),
+			)); ?>
 	</div>
+	
+	
+	
+	
+	
+	
 	
 </div>
 
