@@ -35,7 +35,7 @@
 	<div class="span2"><p class="pull-right"><?php echo $form->dropDownList($model,'salutation_id', CHtml::listData(Salutation::model()->findAll(), 'id', 'salutation'), array('style'=>'width: 90px;')); ?></p></div>
 	<div class="span2"><?php echo $form->textField($model,'first_name',array('size'=>60,'maxlength'=>100,'style'=>'width: 130px;')); ?></div>
 	<div class="span2"><?php echo $form->textField($model,'middle_name',array('size'=>60,'maxlength'=>100,'style'=>'width: 130px;')); ?></div>
-	<div class="span2"><?php echo $form->textField($model,'family_id',array('size'=>60,'maxlength'=>100, 'disabled'=>true,'style'=>'width: 130px;')); ?></div>
+	<div class="span2"><?php echo $form->textField($model,'family_id',array('value'=>$model->family->family_name,'size'=>60,'maxlength'=>100, 'disabled'=>true,'style'=>'width: 130px;')); ?></div>
 	<div class="span2"><?php echo $form->dropDownList($model,'suffix_id', CHtml::listData(Suffix::model()->findAll(), 'id', 'suffix'), array('style'=>'width: 80px;')); ?></div>
 </div>
 

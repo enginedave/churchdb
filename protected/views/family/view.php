@@ -32,11 +32,11 @@ $this->widget('bootstrap.widgets.TbButtonGroup', array(
 
 <!--the class="row" and the span4 are classes for the bootstrap grid not the blue print grid. NOTE the blueprint css framework can probably be deleted and use the one provided with bootstrap-->
 <div class="row">
-	<div class="span4">
+	<div class="span3">
 		<h3>Picture</h3>
 		<p class="well"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/familypic.jpg" alt="Family Picture" height="130" width="130" /></p>
 	</div>
-	<div class="span4">
+	<div class="span5">
 		<h3>Address</h3>
 		<?php $this->widget('bootstrap.widgets.TbDetailView', array(
 	'data'=>$model,
@@ -105,7 +105,7 @@ $this->widget('bootstrap.widgets.TbButtonGroup', array(
 
 
 
-<?php $this->widget('zii.widgets.CListView', array
+<?php $this->widget('bootstrap.widgets.TbListView', array
 		(
 			'dataProvider'=>$peopleDataProvider,
 			'itemView'=>'/people/_view',

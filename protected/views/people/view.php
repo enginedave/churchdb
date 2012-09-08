@@ -1,106 +1,266 @@
 <?php
-$this->breadcrumbs=array(
-	'Peoples'=>array('index'),
-	$model->id,
-);
+	$this->breadcrumbs=array(
+		'Peoples'=>array('index'),
+		$model->id,
+	);
 
-$this->menu=array(
-	array('label'=>'List People', 'url'=>array('index')),
-	//array('label'=>'Create People', 'url'=>array('create')),
-	array('label'=>'Update People', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete People', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage People', 'url'=>array('admin')),
-	array('label'=>'View Family', 'url'=>array('family/view', 'id'=>$model->family_id)),
-);
-?>
+	$this->menu=array(
+		array('label'=>'List People', 'url'=>array('index')),
+		//array('label'=>'Create People', 'url'=>array('create')),
+		array('label'=>'Update People', 'url'=>array('update', 'id'=>$model->id)),
+		array('label'=>'Delete People', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+		array('label'=>'Manage People', 'url'=>array('admin')),
+		array('label'=>'View Family', 'url'=>array('family/view', 'id'=>$model->family_id)),
+	);
+?>							
 
-<h1>View People #<?php echo $model->id; ?></h1>
+<!-- main heading ------------------------->
+<h2>Details for <?php echo CHtml::encode($model->salutation->salutation.' '.$model->first_name.' '.$model->middle_name.' '.$model->family->family_name.' '.$model->suffix->suffix); ?></h2>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'id',
-		//'family_id',
-		array
-		(
-			'name'=>'family_id',
-			'value'=>CHtml::encode($model->family->family_name),
-		),
-		//'salutation_id',
-		array
-		(
-			'name'=>'salutation_id',
-			'value'=>CHtml::encode($model->salutation->salutation),
-		),
-		'first_name',
-		'middle_name',
-		'last_name',
-		'maiden_name',
-		//'suffix_id',
-		array
-		(
-			'name'=>'suffix_id',
-			'value'=>CHtml::encode($model->suffix->suffix),
-		),
-		'nick_name',
-		'mobile_number',
-		'work_number',
-		'email_address1',
-		'email_address2',
-		//'gender',
-		array
-		(
-			'name'=>'gender',
-			'value'=>CHtml::encode($model->getGenderText()),
-		),
-		//'head_of_house',
-		array
-		(
-			'name'=>'head_of_house',
-			'value'=>CHtml::encode($model->getHeadOfHouseText()),
-		),
-		'date_of_birth',
-		'date_of_baptism',
-		//'previous_church_id',
-		array
-		(
-			'name'=>'previous_church_id',
-			'value'=>CHtml::encode($model->previousChurch->church_name),
-		),
-		'date_of_joining',
-		//'membership_status_id',
-		array
-		(
-			'name'=>'membership_status_id',
-			'value'=>CHtml::encode($model->membershipStatus->membership_type),
-		),
-		'date_of_membership',
-		//'next_church_id',
-		array
-		(
-			'name'=>'next_church_id',
-			'value'=>CHtml::encode($model->nextChurch->church_name),
-		),
-		'date_of_leaving',
-		//'marital_status_id',
-		array
-		(
-			'name'=>'marital_status_id',
-			'value'=>CHtml::encode($model->maritalStatus->marital_status_type),
-		),
-		'date_of_wedding',
-		'date_of_death',
-		'grave_plot',
-		'notes',
-		//'gift_aid',
-		array
-		(
-			'name'=>'gift_aid',
-			'value'=>CHtml::encode($model->getGiftAidText()),
-		),
-		//'create_time',
-		//'create_user_id',
-		//'update_time',
-		//'update_user_id',
-	),
-)); ?>
+
+<!--the class="row" and the span4 are classes for the bootstrap grid not the blue print grid. NOTE the blueprint css framework can probably be deleted and use the one provided with bootstrap-->
+<div class="row">
+	<div class="span3">
+		<h3>Picture</h3>
+		<p class="well"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/personpic.jpg" alt="Family Picture" height="130" width="130" /></p>
+	</div>
+	
+	<div class="span5">
+		<h3>Details</h3>
+		<?php $this->widget('bootstrap.widgets.TbDetailView', array(
+			'data'=>$model,
+			'attributes'=>array(
+				//'id',
+				'nick_name',
+				array(
+					'name'=>'Family Name',
+					'type'=>'raw',
+					'value'=>CHtml::link(CHtml::encode($model->family->family_name), array('family/view', 'id'=>$model->family_id)),			
+				),
+				//'family.family_name',
+				'last_name',
+				'maiden_name',
+				array
+						(
+							'name'=>'gender',
+							'value'=>CHtml::encode($model->getGenderText()),
+						),
+			),
+		)); ?>
+	</div>
+	
+	<div class="span4">
+		<h3>Contact Details</h3>
+		<?php $this->widget('bootstrap.widgets.TbDetailView', array(
+			'data'=>$model,
+			'attributes'=>array(
+				//'family.telephone',
+				array(
+					'name'=>'Family Number',
+					'value'=>CHtml::encode($model->family->telephone),
+				),
+				'mobile_number',
+				'work_number',
+				//'email_address1',
+				array(
+					'name'=>'Email Address',
+					'value'=>CHtml::encode($model->email_address1),
+				),
+				//'email_address2',
+				array(
+					'name'=>'Alternate Email',
+					'value'=>CHtml::encode($model->email_address2),
+				),
+				
+				//'district.notes',
+				//array(
+				//		'label'=>'District Leader',
+				//		'value'=> $model->district->districtLeaders->name
+					//),
+			),
+		)); ?>
+	</div>
+	
+</div><!-- the end of the top row -->
+
+<div class="row">
+	<div class="span3">
+		<h3>Key Dates</h3>
+		<?php $this->widget('bootstrap.widgets.TbDetailView', array(
+			'data'=>$model,
+			'attributes'=>array(
+				//'head_of_house',
+				array
+				(
+					'name'=>'head_of_house',
+					'value'=>CHtml::encode($model->getHeadOfHouseText()),
+				),
+				'date_of_birth',
+				'date_of_baptism',
+				//'previous_church_id',
+				array
+				(
+					'name'=>'previous_church_id',
+					'value'=>CHtml::encode($model->previousChurch->church_name),
+				),
+				'date_of_joining',
+				//'membership_status_id',
+				array
+				(
+					'name'=>'membership_status_id',
+					'value'=>CHtml::encode($model->membershipStatus->membership_type),
+				),
+				'date_of_membership',
+				//'next_church_id',
+				array
+				(
+					'name'=>'next_church_id',
+					'value'=>CHtml::encode($model->nextChurch->church_name),
+				),
+				'date_of_leaving',
+				//'marital_status_id',
+				array
+				(
+					'name'=>'marital_status_id',
+					'value'=>CHtml::encode($model->maritalStatus->marital_status_type),
+				),
+				'date_of_wedding',
+				'date_of_death',
+				'grave_plot',
+				'notes',
+				//'gift_aid',
+				array
+				(
+					'name'=>'gift_aid',
+					'value'=>CHtml::encode($model->getGiftAidText()),
+				),
+			
+			),
+		)); ?>
+	</div>
+	<div class="span5">
+		<h3>Title</h3>
+		<?php $this->widget('bootstrap.widgets.TbDetailView', array(
+			'data'=>$model,
+			'attributes'=>array(
+				//'head_of_house',
+				array
+				(
+					'name'=>'head_of_house',
+					'value'=>CHtml::encode($model->getHeadOfHouseText()),
+				),
+				'date_of_birth',
+				'date_of_baptism',
+				//'previous_church_id',
+				array
+				(
+					'name'=>'previous_church_id',
+					'value'=>CHtml::encode($model->previousChurch->church_name),
+				),
+				'date_of_joining',
+				//'membership_status_id',
+				array
+				(
+					'name'=>'membership_status_id',
+					'value'=>CHtml::encode($model->membershipStatus->membership_type),
+				),
+				'date_of_membership',
+				//'next_church_id',
+				array
+				(
+					'name'=>'next_church_id',
+					'value'=>CHtml::encode($model->nextChurch->church_name),
+				),
+				'date_of_leaving',
+				//'marital_status_id',
+				array
+				(
+					'name'=>'marital_status_id',
+					'value'=>CHtml::encode($model->maritalStatus->marital_status_type),
+				),
+				'date_of_wedding',
+				'date_of_death',
+				'grave_plot',
+				'notes',
+				//'gift_aid',
+				array
+				(
+					'name'=>'gift_aid',
+					'value'=>CHtml::encode($model->getGiftAidText()),
+				),
+			
+			),
+		)); ?>		
+		
+		
+	</div>
+	<div class="span4">
+		<h3>Other Info</h3>
+		<?php $this->widget('bootstrap.widgets.TbDetailView', array(
+			'data'=>$model,
+			'attributes'=>array(
+				//'head_of_house',
+				array
+				(
+					'name'=>'head_of_house',
+					'value'=>CHtml::encode($model->getHeadOfHouseText()),
+				),
+				'date_of_birth',
+				'date_of_baptism',
+				//'previous_church_id',
+				array
+				(
+					'name'=>'previous_church_id',
+					'value'=>CHtml::encode($model->previousChurch->church_name),
+				),
+				'date_of_joining',
+				//'membership_status_id',
+				array
+				(
+					'name'=>'membership_status_id',
+					'value'=>CHtml::encode($model->membershipStatus->membership_type),
+				),
+				'date_of_membership',
+				//'next_church_id',
+				array
+				(
+					'name'=>'next_church_id',
+					'value'=>CHtml::encode($model->nextChurch->church_name),
+				),
+				'date_of_leaving',
+				//'marital_status_id',
+				array
+				(
+					'name'=>'marital_status_id',
+					'value'=>CHtml::encode($model->maritalStatus->marital_status_type),
+				),
+				'date_of_wedding',
+				'date_of_death',
+				'grave_plot',
+				'notes',
+				//'gift_aid',
+				array
+				(
+					'name'=>'gift_aid',
+					'value'=>CHtml::encode($model->getGiftAidText()),
+				),
+			
+			),
+		)); ?>
+		
+		
+	</div>
+</div><!-- the of the second row -->
+
+
+
+
+
+
+
+
+
+
+
+
+
