@@ -26,7 +26,7 @@
 	</div>
 	
 	<div class="span5">
-		<h3>Details</h3>
+		<h3>Name Info</h3>
 		<?php $this->widget('bootstrap.widgets.TbDetailView', array(
 			'data'=>$model,
 			'attributes'=>array(
@@ -84,117 +84,7 @@
 </div><!-- the end of the top row -->
 
 <div class="row">
-	<div class="span3">
-		<h3>Key Dates</h3>
-		<?php $this->widget('bootstrap.widgets.TbDetailView', array(
-			'data'=>$model,
-			'attributes'=>array(
-				//'head_of_house',
-				array
-				(
-					'name'=>'head_of_house',
-					'value'=>CHtml::encode($model->getHeadOfHouseText()),
-				),
-				'date_of_birth',
-				'date_of_baptism',
-				//'previous_church_id',
-				array
-				(
-					'name'=>'previous_church_id',
-					'value'=>CHtml::encode($model->previousChurch->church_name),
-				),
-				'date_of_joining',
-				//'membership_status_id',
-				array
-				(
-					'name'=>'membership_status_id',
-					'value'=>CHtml::encode($model->membershipStatus->membership_type),
-				),
-				'date_of_membership',
-				//'next_church_id',
-				array
-				(
-					'name'=>'next_church_id',
-					'value'=>CHtml::encode($model->nextChurch->church_name),
-				),
-				'date_of_leaving',
-				//'marital_status_id',
-				array
-				(
-					'name'=>'marital_status_id',
-					'value'=>CHtml::encode($model->maritalStatus->marital_status_type),
-				),
-				'date_of_wedding',
-				'date_of_death',
-				'grave_plot',
-				'notes',
-				//'gift_aid',
-				array
-				(
-					'name'=>'gift_aid',
-					'value'=>CHtml::encode($model->getGiftAidText()),
-				),
-			
-			),
-		)); ?>
-	</div>
-	<div class="span5">
-		<h3>Title</h3>
-		<?php $this->widget('bootstrap.widgets.TbDetailView', array(
-			'data'=>$model,
-			'attributes'=>array(
-				//'head_of_house',
-				array
-				(
-					'name'=>'head_of_house',
-					'value'=>CHtml::encode($model->getHeadOfHouseText()),
-				),
-				'date_of_birth',
-				'date_of_baptism',
-				//'previous_church_id',
-				array
-				(
-					'name'=>'previous_church_id',
-					'value'=>CHtml::encode($model->previousChurch->church_name),
-				),
-				'date_of_joining',
-				//'membership_status_id',
-				array
-				(
-					'name'=>'membership_status_id',
-					'value'=>CHtml::encode($model->membershipStatus->membership_type),
-				),
-				'date_of_membership',
-				//'next_church_id',
-				array
-				(
-					'name'=>'next_church_id',
-					'value'=>CHtml::encode($model->nextChurch->church_name),
-				),
-				'date_of_leaving',
-				//'marital_status_id',
-				array
-				(
-					'name'=>'marital_status_id',
-					'value'=>CHtml::encode($model->maritalStatus->marital_status_type),
-				),
-				'date_of_wedding',
-				'date_of_death',
-				'grave_plot',
-				'notes',
-				//'gift_aid',
-				array
-				(
-					'name'=>'gift_aid',
-					'value'=>CHtml::encode($model->getGiftAidText()),
-				),
-			
-			),
-		)); ?>		
-		
-		
-	</div>
-	<div class="span4">
+	<div class="span6">
 		<h3>Other Info</h3>
 		<?php $this->widget('bootstrap.widgets.TbDetailView', array(
 			'data'=>$model,
@@ -202,42 +92,41 @@
 				//'head_of_house',
 				array
 				(
-					'name'=>'head_of_house',
-					'value'=>CHtml::encode($model->getHeadOfHouseText()),
+					'name'=>'membership_status_id',
+					'value'=>CHtml::encode($model->membershipStatus->membership_type),
 				),
-				'date_of_birth',
-				'date_of_baptism',
+				array
+				(
+					'name'=>'marital_status_id',
+					'value'=>CHtml::encode($model->maritalStatus->marital_status_type),
+				),
 				//'previous_church_id',
 				array
 				(
 					'name'=>'previous_church_id',
 					'value'=>CHtml::encode($model->previousChurch->church_name),
 				),
-				'date_of_joining',
-				//'membership_status_id',
-				array
-				(
-					'name'=>'membership_status_id',
-					'value'=>CHtml::encode($model->membershipStatus->membership_type),
-				),
-				'date_of_membership',
-				//'next_church_id',
 				array
 				(
 					'name'=>'next_church_id',
 					'value'=>CHtml::encode($model->nextChurch->church_name),
 				),
-				'date_of_leaving',
-				//'marital_status_id',
+				//'membership_status_id',
+				
+				
+				//'next_church_id',
 				array
 				(
-					'name'=>'marital_status_id',
-					'value'=>CHtml::encode($model->maritalStatus->marital_status_type),
+					'name'=>'head_of_house',
+					'value'=>CHtml::encode($model->getHeadOfHouseText()),
 				),
-				'date_of_wedding',
-				'date_of_death',
+				
+			
+				//'marital_status_id',
+				
+			
 				'grave_plot',
-				'notes',
+				//'notes',
 				//'gift_aid',
 				array
 				(
@@ -246,11 +135,57 @@
 				),
 			
 			),
+		)); ?>	
+		
+
+		
+		
+	</div>
+	<div class="span6">
+		<h3>Date Info</h3>
+		<?php $this->widget('bootstrap.widgets.TbDetailView', array(
+			'data'=>$model,
+			'attributes'=>array(
+				'date_of_birth',
+				'date_of_baptism',
+				'date_of_joining',
+				'date_of_membership',
+				'date_of_leaving',
+				'date_of_wedding',
+				'date_of_death',
+			),
 		)); ?>
 		
 		
 	</div>
 </div><!-- the of the second row -->
+
+
+<div class="row">
+	<div class="span12">
+		<?php $this->beginWidget('bootstrap.widgets.TbHeroUnit', array(
+    		//'heading'=>'Notes',
+			)); ?>
+			<h3>Notes</h3>
+    		<p style="font-size: 0.9em;"><?php echo CHtml::encode($model->notes); ?></p>
+    		
+    		<?php $this->widget('bootstrap.widgets.TbButton', array(
+				'label'=>'Update Details',
+				'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+				'size'=>'small', // null, 'large', 'small' or 'mini'
+				
+				
+				'url'=>array('update', 'id'=>$model->id),
+				
+			)); ?>
+    		
+    		
+		<?php $this->endWidget(); ?>
+		
+		
+		
+	</div>
+</div>
 
 
 
