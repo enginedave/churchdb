@@ -30,7 +30,7 @@
 
 
 
-<?php $this->widget('bootstrap.widgets.TbButtonGroup', array(
+<?php /*$this->widget('bootstrap.widgets.TbButtonGroup', array(
     'buttons'=>array(
         array('label'=>'Create Family', 'url'=>array('create')),
         //array('label'=>'another button', 'url'=>'#'),
@@ -39,7 +39,7 @@
     'htmlOptions'=>array('style'=>'float: right;'),
     'type'=>'success',
     'size'=>'small',    
-)); ?>
+));*/ ?>
 
 
 
@@ -101,7 +101,12 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 
 
 
-
+<?php $this->widget('bootstrap.widgets.TbButton', array(
+    'label'=>'Create Family',
+    'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+    'size'=>'small', // null, 'large', 'small' or 'mini'
+    'url'=>array('create'),
+)); ?></br></br>
 
 
 

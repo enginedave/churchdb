@@ -146,7 +146,12 @@
 		<?php $this->widget('bootstrap.widgets.TbDetailView', array(
 			'data'=>$model,
 			'attributes'=>array(
-				'date_of_birth',
+				array
+				(
+					'name'=>'Date of birth',
+					'value'=>CHtml::encode($model->date_of_birth.' Age:'.$model->getAgeOfPerson()),
+				),
+				//'date_of_birth',
 				'date_of_baptism',
 				'date_of_joining',
 				'date_of_membership',
@@ -169,15 +174,7 @@
 			<h3>Notes</h3>
     		<p style="font-size: 0.9em;"><?php echo CHtml::encode($model->notes); ?></p>
     		
-    		<?php $this->widget('bootstrap.widgets.TbButton', array(
-				'label'=>'Update Details',
-				'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
-				'size'=>'small', // null, 'large', 'small' or 'mini'
-				
-				
-				'url'=>array('update', 'id'=>$model->id),
-				
-			)); ?>
+    		
     		
     		
 		<?php $this->endWidget(); ?>
@@ -187,7 +184,15 @@
 	</div>
 </div>
 
-
+<?php $this->widget('bootstrap.widgets.TbButton', array(
+	'label'=>'Update Details',
+	'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+	'size'=>'small', // null, 'large', 'small' or 'mini'
+	
+	
+	'url'=>array('update', 'id'=>$model->id),
+				
+)); ?></br></br>
 
 
 

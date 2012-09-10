@@ -139,7 +139,7 @@
 
 		<?php $this->widget('bootstrap.widgets.TbBreadcrumbs', array(
     		'links'=>$this->breadcrumbs,
-			'htmlOptions'=>array('style'=>'font-size: 0.75em;'),
+			'htmlOptions'=>array('style'=>'font-size: 1em;'),
 		)); ?>
 
 

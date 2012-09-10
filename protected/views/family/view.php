@@ -13,7 +13,7 @@ $this->breadcrumbs=array(
 
 
 <?php
-$this->widget('bootstrap.widgets.TbButtonGroup', array(
+/*$this->widget('bootstrap.widgets.TbButtonGroup', array(
     'buttons'=>array(
         array('label'=>'Update Family', 'url'=>array('update', 'id'=>$model->id)),
         array('label'=>'Create Family Member', 'url'=>array('People/create','fid'=>$model->id)),
@@ -22,7 +22,7 @@ $this->widget('bootstrap.widgets.TbButtonGroup', array(
     'htmlOptions'=>array('style'=>'float: right;'),
     'type'=>'success',
     'size'=>'small',    
-));
+));*/
 
 ?>
 
@@ -88,7 +88,12 @@ $this->widget('bootstrap.widgets.TbButtonGroup', array(
 	
 </div>
 
-
+<?php $this->widget('bootstrap.widgets.TbButton', array(
+    'label'=>'Update Family',
+    'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+    'size'=>'small', // null, 'large', 'small' or 'mini'
+    'url'=>array('update', 'id'=>$model->id)
+)); ?>
 
 
 
@@ -117,4 +122,14 @@ $this->widget('bootstrap.widgets.TbButtonGroup', array(
 ?>
 
 
+<div class="row">
+<div class="span3">
+<?php $this->widget('bootstrap.widgets.TbButton', array(
+    'label'=>'New Member',
+    'type'=>'primary', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+    'size'=>'small', // null, 'large', 'small' or 'mini'
+    'url'=>array('People/create','fid'=>$model->id)
+)); ?></br></br>
+</div>
+</div>
 
