@@ -10,6 +10,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Create People</h1>
+<h2>Add a person to the <?php echo CHtml::encode($model->family->family_name); ?> Family</h2>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

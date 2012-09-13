@@ -13,6 +13,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update <?php echo $model->family_name; ?> Family Details</h1>
+<h2>Update <?php echo $model->family_name; ?> Family Details</h2>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
