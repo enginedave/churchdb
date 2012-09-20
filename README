@@ -6,10 +6,12 @@ When this code is cloned from GitHub it will not work until the following folder
 
 assets/
 protected/runtime/
+protected/uploads/
 
-both of these need to be writeable by the web server using the following commands
+all of these need to be writeable by the web server using the following commands
 
 chmod 777 assets
 chmod 777 runtime
+chmod 777 uploads
 
 
