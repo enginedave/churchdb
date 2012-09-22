@@ -400,6 +400,7 @@ INSERT INTO `tbl_marital_status` (`marital_status_type`,`create_time`,`create_us
 INSERT INTO `tbl_marital_status` (`marital_status_type`,`create_time`,`create_user_id`,`update_time`,`update_user_id`) VALUES ('Re-Married','','','','');
 
 -- the membership status
+INSERT INTO `tbl_membership_status` (`membership_type`,`create_time`,`create_user_id`,`update_time`,`update_user_id`) VALUES ('Unassigned','','','','');
 INSERT INTO `tbl_membership_status` (`membership_type`,`create_time`,`create_user_id`,`update_time`,`update_user_id`) VALUES ('Visitor','','','','');
 INSERT INTO `tbl_membership_status` (`membership_type`,`create_time`,`create_user_id`,`update_time`,`update_user_id`) VALUES ('Adherent','','','','');
 INSERT INTO `tbl_membership_status` (`membership_type`,`create_time`,`create_user_id`,`update_time`,`update_user_id`) VALUES ('Member','','','','');
