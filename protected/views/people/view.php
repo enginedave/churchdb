@@ -25,7 +25,7 @@
 		<p class="well"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/personpic.jpg" alt="Family Picture" height="130" width="130" /></p>
 	</div>
 	
-	<div class="span5">
+	<div class="span4">
 		<h3>Name Info</h3>
 		<?php $this->widget('bootstrap.widgets.TbDetailView', array(
 			'data'=>$model,
@@ -49,7 +49,7 @@
 		)); ?>
 	</div>
 	
-	<div class="span4">
+	<div class="span5">
 		<h3>Contact Details</h3>
 		<?php $this->widget('bootstrap.widgets.TbDetailView', array(
 			'data'=>$model,

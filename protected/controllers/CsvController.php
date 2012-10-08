@@ -1,31 +1,5 @@
 <?php
 
-/*notes 
-
-need to get the salutation importing by 
-			1. getting the list from the db salutiation table
-			2. see if the one in the csv file matches the existing list in the table
-			3. if new add to the db
-			4. if already there get the index
-			5. assign the index to the new person
-
-need to get the dates importing also correctly they seem to be confused perhaps by the USA format.
-
-need to get gender, HOH and gift all working similarly
-
-
-
-ALSO need to get people saving when the family already exist and checks for duplicates within the family implemented.
-
-STILL LOTS todo here*/
-
-
-
-
-
-
-
-
 
 class CsvController extends Controller
 {
@@ -68,76 +42,43 @@ class CsvController extends Controller
 						
 						$newFamily = $this->populateFamilyWithCsvRow($data, $headings);
 						$newPeople = $this->populatePeopleWithCsvRow($data, $headings);
-					
-						//check if the family_name in the csv file is already in the database
-						// NOTE $matchingFamily could be more than one!
-						$matchingFamily = Family::model()->findAllByAttributes(array('family_name'=>$data[array_search("family_name",$headings)]));
 						
-						//the defination of a family is linked to their name and address
-						//three things are checked 
-						//1. the family_name
-						//2. the house_number
-						//3. the address_line1
-						//if all three are the same then it is assumed that this is the same family
-						//if any one differs i.e. you could have a family with the same name in the same street but if their house 
-						//number is different then they consistute a different family and are added to the database in the save() operation.
-						
-						//if new name then save
-						if ($matchingFamily==NULL){  //if this is NULL then i know that i have a different family_name and therefore a different family therefore save to DB
-							$newFamily->save();
-							$familyFromDb = Family::model()->findAllByAttributes(array(
+						$existingFamilyFromDb = Family::model()->findByAttributes(array(
 										'family_name' => $newFamily->family_name,
 										'house_number' => $newFamily->house_number,
 										'address_line1' => $newFamily->address_line1,
 										)
 							);
-							foreach ($familyFromDb as $fdb){
-								$newPeople->setAttributes(array('family_id' => $fdb->id));
-								echo "family id from Db: ".$fdb->id;
-							}
-							if ($newPeople->save()) {echo "people SAVED";} else {echo "didnt WORK";}
-							echo "<p>The <strong>".$newFamily->family_name."</strong> family has been added - NEW NAME + NEW PERSON</p><hr />";
-						}
 						
-						//if name and address are the same dont save
-						//if $matchingFamily is not NULL it may contain more that one family object with the same name 
-						//need to loop through the array of objects and check if the house_number or address_line1 is different
-						if ($matchingFamily != NULL){
-							foreach ($matchingFamily as $mf){
-								//test to see if the house_numbers are the same
-								echo ($mf->house_number == $newFamily->house_number) ? "<p>".$mf->house_number." is the same as: ".$newFamily->house_number."</p>" : "<p>".$mf->house_number." is NOT the same as: ".$newFamily->house_number."</p>";
-								echo ($mf->address_line1 == $newFamily->address_line1) ? "<p>".$mf->address_line1." is the same as: ".$newFamily->address_line1."</p>" : "<p>".$mf->address_line1." is NOT the same as: ".$newFamily->address_line1."</p>";
-								if ($mf->house_number == $newFamily->house_number && $mf->address_line1 == $newFamily->address_line1){
-									//family_name, house_number, address_line1 all the same therefore it is the same family get the family_id from the object 
-									$currentFamilyId = $mf->id;
-									$shouldisave = FALSE;
-									break;
-								}
-								else if($mf->house_number != $newFamily->house_number || $mf->address_line1 != $newFamily->address_line1){
-									//not equal means different house_number OR address_line1 therefore new family and save to DB
-									$shouldisave = TRUE;
-								}
-							}
-							if ($shouldisave){
-								$newFamily->save();
-								$familyFromDb = Family::model()->findAllByAttributes(array(
+						if ($existingFamilyFromDb == NULL) {   //if true i have a new family
+							$newFamily->save();
+							//read the family back to get the proper ID
+							$newFamilyFromDB = Family::model()->findByAttributes(array(
 										'family_name' => $newFamily->family_name,
 										'house_number' => $newFamily->house_number,
 										'address_line1' => $newFamily->address_line1,
 										)
-								);
-								foreach ($familyFromDb as $fdb){
-									$newPeople->setAttributes(array('family_id' => $fdb->id));
-								}
-								$newPeople->save();
-								echo "<p>The <strong>".$newFamily->family_name." ".$newFamily->house_number." ".$newFamily->address_line1." </strong> family has been added to DB + PERSON<p>";
-							}
-							else {
-								echo "<p> This family is already stored in the database: <strong>".$mf->family_name.", ".$mf->house_number.", ".$mf->address_line1."</strong> (all match) </p>";
-							}
-							echo "<hr />";
+							);
+							//set the family_id for the people object to the correct family
+							$newPeople->setAttributes(array('family_id' => $newFamilyFromDB->id));		
+							$newPeople->save();					
 						}
-					}//end if for this row
+						
+						if ($existingFamilyFromDb != NULL) {   //family already exists
+							$existingPersonFromDb = People::model()->findByAttributes(array(
+										'first_name' => $newPeople->first_name,
+										'middle_name' => $newPeople->middle_name,
+										)
+							);
+							if ($existingPersonFromDb == NULL) {  //if true i have a new person
+								$newPeople->setAttributes(array('family_id' => $existingFamilyFromDb->id));		
+								$newPeople->save();
+							}
+						}
+						
+						
+					
+					}//end if
 					$row++;
 				}//end while loop
 				fclose($handle);
@@ -191,11 +132,112 @@ class CsvController extends Controller
 	
 	
 	private function populatePeopleWithCsvRow($csvrow, $headers){
-		$newPeople = new People;
+		$newPeople = new People;		
+		
+		//get the appropriate id for the salutation ************************************* SALUTATION ID ***************************************
+		$salutationFromCsv = $csvrow[array_search("salutation",$headers)];
+		//clean up . at end if present 
+		if ($salutationFromCsv == 'Mr.') $salutationFromCsv='Mr';
+		if ($salutationFromCsv == 'Mrs.') $salutationFromCsv='Mrs';
+		if ($salutationFromCsv == 'Ms.') $salutationFromCsv='Ms';
+		if ($salutationFromCsv == 'Miss.') $salutationFromCsv='Miss';
+		if ($salutationFromCsv == 'Master.') $salutationFromCsv='Master';
+		if ($salutationFromCsv == 'Dr.') $salutationFromCsv='Dr';
+		if ($salutationFromCsv == 'Rev.') $salutationFromCsv='Rev';
+		if ($salutationFromCsv == 'Prof.') $salutationFromCsv='Prof';
+		//find a match in the database, get the object and thus the id value
+		$salutationFromDb = Salutation::model()->findByAttributes(array(
+					'salutation'=> $salutationFromCsv,
+				));
+		if ($salutationFromDb == NULL) {
+			echo 'NULL returned<br />';
+			$newSal = new Salutation;
+			$newSal->setAttributes(array(
+					'salutation'=>$salutationFromCsv,
+					));
+			//save to the database
+			$newSal->save();
+			$salutationFromDb = Salutation::model()->findByAttributes(array(
+					'salutation'=>$salutationFromCsv,
+					));
+		} else {
+			echo $salutationFromDb->salutation.' has the id value of :'.$salutationFromDb->id.'<br />';
+		}	
+		if ($salutationFromDb == NULL) { $salid = 1;} else {$salid = $salutationFromDb->id;}
+				
+		//get the appropriate marital status ************************************************** MARITAL STATUS ID *******************************************
+		$maritalFromCsv = $csvrow[array_search("marital_status",$headers)];	
+		//find a match in the database, get the object and thus the id value
+		$maritalFromDb = MaritalStatus::model()->findByAttributes(array(
+					'marital_status_type'=> $maritalFromCsv,
+				)); 
+		if ($maritalFromDb == NULL) {
+			echo 'NULL returned<br />';
+			$newMs = new MaritalStatus;
+			$newMs->setAttributes(array(
+					'marital_status_type' => $maritalFromCsv,
+					));
+			//save to the database
+			$newMs->save();
+			$maritalFromDb = MaritalStatus::model()->findByAttributes(array(
+					'marital_status_type'=>$maritalFromCsv,
+					));
+		} 
+		if ($maritalFromDb == NULL) { $msid = 1;} else {$msid = $maritalFromDb->id;}
+		
+		//get the appropriate membership status ************************************************** MEMBERSHIP STATUS ID *******************************************
+		$membershipFromCsv = $csvrow[array_search("membership_status",$headers)];	
+		//find a match in the database, get the object and thus the id value
+		$membershipFromDb = MembershipStatus::model()->findByAttributes(array(
+					'membership_type'=> $membershipFromCsv,
+				)); 
+		if ($membershipFromDb == NULL) {
+			echo 'NULL returned<br />';
+			$newMt = new MembershipStatus;
+			$newMt->setAttributes(array(
+					'membership_type' => $membershipFromCsv,
+					));
+			//save to the database
+			$newMt->save();
+			$membershipFromDb = MembershipStatus::model()->findByAttributes(array(
+					'membership_type'=>$membershipFromCsv,
+					));
+		} 
+		if ($membershipFromDb == NULL) { $mtid = 1;} else {$mtid = $membershipFromDb->id;}
+				
+		//get the appropriate gender information ************************************************** GENDER *******************************************
+		$genderFromCsv = trim($csvrow[array_search("gender",$headers)]);
+		$gen = 1; //default to male if not changed 
+		switch ($genderFromCsv) {
+			case 'Male':
+				$gen = 1;
+				break;
+			case 'male':
+				$gen = 1;
+				break;
+			case 'm':
+				$gen = 1;
+				break;
+			case 'Female':
+				$gen = 0;
+				break;
+			case 'female':
+				$gen = 0;
+				break;
+			case 'f':
+				$gen = 0;
+				break;
+		}
 		
 		
 		
 		
+		
+		
+		
+		
+		
+				
 		$newPeople->setAttributes(
 							array(
 								//'family_id' => '',      --this will be assigned by the controller when it knows what family the person belongs to.
@@ -213,30 +255,47 @@ class CsvController extends Controller
 								'notes' => (array_search("notes",$headers) == FALSE ) ? '' : $csvrow[array_search("notes",$headers)],
 								
 								//the date fields								
-								'date_of_birth' => $csvrow[array_search("date_of_birth",$headers)],
-								'date_of_baptism' => $csvrow[array_search("date_of_baptism",$headers)],
-								'date_of_joining' => $csvrow[array_search("date_of_joining",$headers)],								
-								'date_of_membership' => $csvrow[array_search("date_of_membership",$headers)],								
-								'date_of_leaving' => $csvrow[array_search("date_of_leaving",$headers)],								
-								'date_of_wedding' => $csvrow[array_search("date_of_wedding",$headers)],
-								'date_of_death' => $csvrow[array_search("date_of_death",$headers)],
+								// use the private function (formatDateFromCsv) to correctly format the date for the People model
+								'date_of_birth' => $this->formatDateFromCsv($csvrow[array_search("date_of_birth",$headers)]),
+								'date_of_baptism' => $this->formatDateFromCsv($csvrow[array_search("date_of_baptism",$headers)]),
+								'date_of_joining' => $this->formatDateFromCsv($csvrow[array_search("date_of_joining",$headers)]),								
+								'date_of_membership' => $this->formatDateFromCsv($csvrow[array_search("date_of_membership",$headers)]),								
+								'date_of_leaving' => $this->formatDateFromCsv($csvrow[array_search("date_of_leaving",$headers)]),								
+								'date_of_wedding' => $this->formatDateFromCsv($csvrow[array_search("date_of_wedding",$headers)]),
+								'date_of_death' => $this->formatDateFromCsv($csvrow[array_search("date_of_death",$headers)]),
 								
 								// these are all constants in the People model
-								'gender' => '1',
-								'head_of_house' =>'1',
-								'gift_aid' => '1',
+								'gender' => $gen,
+								'head_of_house' =>'0',   //defaults to no
+								'gift_aid' => '0',       //defaults to no
 								
 								//these are all referring to other look up tables
 								'previous_church_id' => '1', //an id of 1 defaults to NULL 
 								'next_church_id' => '1',     //an id of 1 defaults to NULL
-								'membership_status_id' => '1',   //an id of 1 defaults to Unassigned
-								'marital_status_id' => '1',      //an id of 1 defaults to Unknown
-								'salutation_id' =>'1',
+								'membership_status_id' => $mtid,   //defaults to an id of 1 Unassigned
+								'marital_status_id' => $msid,     //defaults to 1 unknown if CSV file empty 
+								'salutation_id' => $salid, //defaults to Mr if CSV file empty
 								'suffix_id' =>'1',   //an id of 1 defaults to NULL
 							)
 						);
 		return $newPeople;	
 	}//end populatePeopleWithCsvRow
+	
+	
+	private function formatDateFromCsv($csvdate){   //assumed date 25/08/2012 dd/mm/yyyy
+		//this function simply takes the value from the csv file which may use / as the separator (most common)
+		//strip out the day month and year 
+		//put it together in a way that will be read by the People model correctly
+		if ($csvdate == NULL){
+			return NULL;
+		} else {
+			$day = substr($csvdate, 0, 2);
+			$mth = substr($csvdate, 3, 2);
+			$yer = substr($csvdate, 6, 4);
+			return $day.'-'.$mth.'-'.$yer;
+		}
+	}
+	
 	
 	
 	
