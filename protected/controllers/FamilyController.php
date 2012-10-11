@@ -95,7 +95,7 @@ class FamilyController extends Controller
 			),
 			'pagination'=>array
 				(
-				'pageSize'=>5,
+				'pageSize'=>9,
 				),
 		)
 		);

@@ -107,19 +107,25 @@ $this->breadcrumbs=array(
 <h2>List of Family Members</h2>
 
 
+<?php $this->widget('bootstrap.widgets.TbThumbnails', array(   //this used to be a CListView
+    'dataProvider'=>$peopleDataProvider,
+    'template'=>"{items}\n{pager}",
+    'itemView'=>'/people/_view',
+)); ?>
 
 
 
-<?php $this->widget('bootstrap.widgets.TbListView', array
-		(
-			'dataProvider'=>$peopleDataProvider,
-			'itemView'=>'/people/_view',
-		)
-		);
 
 
 
-?>
+
+
+
+
+
+
+
+
 
 
 <div class="row">
