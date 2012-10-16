@@ -8,6 +8,7 @@
  * @property string $email
  * @property string $username
  * @property string $password
+ * @property string $role_id
  * @property string $last_login_time
  * @property string $create_time
  * @property integer $create_user_id
@@ -17,8 +18,21 @@
 class User extends ChurchDbActiveRecord
 {
 	public $password_repeat;
+	
+	//for use with the role options - no separate model needed as choice is limited
+	const SUPERADMIN=4;
+	const ADMINISTRATOR=3;
+	const EDITOR=2;
+	const READER=1;
+	
+	
+	
+	
+	
+	
 	/**
 	 * Returns the static model of the specified AR class.
+	 * @param string $className active record class name.
 	 * @return User the static model class
 	 */
 	public static function model($className=__CLASS__)
@@ -42,17 +56,18 @@ class User extends ChurchDbActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('email, username, password', 'required'),
+			array('email, username, password, role_id', 'required'),
 			array('password', 'compare'),
 			array('password_repeat', 'safe'),
 			//array('create_user_id, update_user_id', 'numerical', 'integerOnly'=>true),
+			array('role_id', 'numerical', 'integerOnly'=>true),
 			array('email, username', 'length', 'max'=>100),
 			array('password', 'length', 'max'=>128),
 			array('email, username', 'unique'),
 			//array('last_login_time, create_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, email, username, password, last_login_time, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
+			array('id, email, username, password, role_id, last_login_time, create_time, create_user_id, update_time, update_user_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -77,6 +92,7 @@ class User extends ChurchDbActiveRecord
 			'email' => 'Email',
 			'username' => 'Username',
 			'password' => 'Password',
+			'role_id' => 'Role',
 			'last_login_time' => 'Last Login Time',
 			'create_time' => 'Create Time',
 			'create_user_id' => 'Create User',
@@ -100,6 +116,7 @@ class User extends ChurchDbActiveRecord
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('username',$this->username,true);
 		$criteria->compare('password',$this->password,true);
+		$criteria->compare('role_id',$this->role_id);
 		$criteria->compare('last_login_time',$this->last_login_time,true);
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('create_user_id',$this->create_user_id);
@@ -111,6 +128,36 @@ class User extends ChurchDbActiveRecord
 		));
 	}
 	
+
+
+
+
+
+
+
+
+	public function getRoleText()
+	{
+		$roleOptions=$this->roleOptions;
+		return isset($roleOptions[$this->role_id]) ? $roleOptions[$this->role_id] : "unknown type ({$this->role_id})";
+	}
+	
+	
+	
+	public function getRoleOptions()
+	{
+		return array(
+				self::SUPERADMIN=>'SuperAdmin',
+				self::ADMINISTRATOR=>'Administrator',
+				self::EDITOR=>'Editor',
+				self::READER=>'Reader',
+		);	
+	}
+
+
+
+
+
 
 	
 	
@@ -129,6 +176,28 @@ class User extends ChurchDbActiveRecord
 	{
 		return md5($value);
 	}	
+	
+	
+	
+	/*protected function beforeSave()
+	{
+		//need to include code here to change the AuthAssignment table in the database to give 
+		//this user the proper role i.e. SuperAdmin, Administrator, Editor, or Reader
+	}*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

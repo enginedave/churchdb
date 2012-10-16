@@ -32,6 +32,19 @@
 		<?php echo $form->passwordField($model,'password_repeat',array('size'=>20,'maxlength'=>128)); ?>
 		<?php echo $form->error($model,'password_repeat'); ?>
 	</div>
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'role_id'); ?>
+		<?php //echo $form->textField($model,'role_id',array('size'=>60,'maxlength'=>100)); ?>
+		
+		
+		<?php //echo $form->dropDownList($model,'role_id', CHtml::listData(User::model()->getRoleOptions(), 'role_id', 'Desc'), array('style'=>'width: 210px;')); ?>
+		<?php //echo $form->dropDownList($model,'role_id',(array(0=>'SuperAdmin', 1=>'Admin', 2=>'other'))); ?>
+		<?php echo $form->dropDownList($model,'role_id',CHtml::encodeArray((User::model()->getRoleOptions()))); ?>
+		
+		
+		<?php echo $form->error($model,'role_id'); ?>
+	</div>
 
 	<!--<div class="row">
 		<?php echo $form->labelEx($model,'last_login_time'); ?>

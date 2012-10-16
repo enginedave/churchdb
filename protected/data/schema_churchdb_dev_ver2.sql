@@ -111,6 +111,7 @@ CREATE TABLE `tbl_user` (
   `email` VARCHAR(100) NOT NULL,
   `username` VARCHAR(100) NOT NULL,
   `password` VARCHAR(128) NOT NULL,
+  `role_id` INTEGER NULL DEFAULT NULL,
   `last_login_time` DATETIME NULL DEFAULT NULL,
   `create_time` DATETIME NULL DEFAULT NULL,
   `create_user_id` INTEGER NULL DEFAULT NULL,

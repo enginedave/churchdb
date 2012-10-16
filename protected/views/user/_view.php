@@ -15,6 +15,15 @@
 	<b><?php echo CHtml::encode($data->getAttributeLabel('password')); ?>:</b>
 	<?php echo CHtml::encode($data->password); ?>
 	<br />
+	
+	<b><?php echo CHtml::encode($data->getAttributeLabel('role_id')); ?>:</b>
+	<?php //echo CHtml::encode($data->role_id); ?>
+	<?php echo CHtml::encode($data->getRoleText()); ?>
+	<br />
+	
+	
+	
+	
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('last_login_time')); ?>:</b>
 	<?php echo CHtml::encode($data->last_login_time); ?>

@@ -23,6 +23,14 @@ $this->menu=array(
 		'username',
 		'password',
 		'last_login_time',
+		'role_id',
+		array
+						(
+							'name'=>'role_id',
+							'value'=>CHtml::encode($model->getRoleText()),
+						),
+		
+		
 		//'create_time',
 		//'create_user_id',
 		//'update_time',
