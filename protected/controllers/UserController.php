@@ -107,6 +107,11 @@ class UserController extends Controller
 		if(isset($_POST['User']))
 		{
 			$model->attributes=$_POST['User'];
+			//set the role_id on the create operation to reader (1) 
+			//the SuperAdmin will then be forced to edit the new user and 
+			//decide the level of access to grant (i.e. upgrade to editor, administrator 
+			//or give full access as super admin
+			$model->role_id=1;
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -131,10 +136,15 @@ class UserController extends Controller
 		if(isset($_POST['User']))
 		{
 			$model->attributes=$_POST['User'];
+			//update the Authassignment Table with the appropriate role 
+			$model->updateAuthAssignment();
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
-
+		
+		//clear the password field to force the SuperAdmin to 
+		//enter two passwords that match
+		$model->password=null;
 		$this->render('update',array(
 			'model'=>$model,
 		));

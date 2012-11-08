@@ -50,7 +50,9 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		array
 						(
 							'name'=>'role_id',
-							'value'=>CHtml::encode($model->getRoleText()),
+							'header'=>'theRole',
+							//'value'=>CHtml::encode($model->getRoleText()),
+							'value'=>'$data->getRoleText()'
 						),
 		/*
 		'last_login_time',

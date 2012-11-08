@@ -147,10 +147,10 @@ class User extends ChurchDbActiveRecord
 	public function getRoleOptions()
 	{
 		return array(
-				self::SUPERADMIN=>'SuperAdmin',
-				self::ADMINISTRATOR=>'Administrator',
-				self::EDITOR=>'Editor',
 				self::READER=>'Reader',
+				self::EDITOR=>'Editor',
+				self::ADMINISTRATOR=>'Administrator',
+				self::SUPERADMIN=>'SuperAdmin',
 		);	
 	}
 
@@ -179,8 +179,45 @@ class User extends ChurchDbActiveRecord
 	
 	
 	
+	public function updateAuthAssignment()
+	{
+		// clear the existing AuthAssignment by deleting the row from the database
+		$sql = "DELETE FROM AuthAssignment WHERE userid=:userId";
+		$command = Yii::app()->db->createCommand($sql);
+		$command->bindValue(":userId", $this->id, PDO::PARAM_INT);
+		$command->execute();
+		
+		//Yii::app()->authManager->assign('reader', 25);
+				
+		if ($this->role_id==1) Yii::app()->authManager->assign('reader', $this->id);
+		if ($this->role_id==2) Yii::app()->authManager->assign('editor', $this->id);
+		if ($this->role_id==3) Yii::app()->authManager->assign('administrator', $this->id);
+		if ($this->role_id==4) Yii::app()->authManager->assign('superadmin', $this->id);
+	
+	}
+	
+	
+	
 	/*protected function beforeSave()
 	{
+		
+		echo 'before save function';
+		
+		
+		if ($this->role_id==4) {
+				Yii::app()->authManager->assign('superadmin', $this->id);
+			}
+		if ($this->role_id==3) {
+				Yii::app()->authManager->assign('administrator', $this->id);
+			}
+		if ($this->role_id==2) {
+				Yii::app()->authManager->assign('editor', $this->id);
+			}
+		if ($this->role_id==1) {
+				Yii::app()->authManager->revoke('reader', $this->id);
+				Yii::app()->authManager->assign('reader', $this->id);
+			}
+					
 		//need to include code here to change the AuthAssignment table in the database to give 
 		//this user the proper role i.e. SuperAdmin, Administrator, Editor, or Reader
 	}*/
