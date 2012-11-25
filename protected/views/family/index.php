@@ -91,6 +91,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
         array('name'=>'address_line1', 'header'=>'Address'),
         array('name'=>'telephone', 'header'=>'Tel'),
 		array('name'=>'district.district_name', 'header'=>'District'),
+		
         array(
             'class'=>'bootstrap.widgets.TbButtonColumn',
 			'template'=>'{update}{view}',
