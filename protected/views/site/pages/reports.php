@@ -6,7 +6,7 @@ $this->breadcrumbs=array(
 ?>
 <h1>Information Reporting</h1>
 
-<p>Please select from the list of reports below.</p>
+<!--<p>Please select from the list of reports below.</p>-->
 
 <div>
 		<?php $this->widget('zii.widgets.CMenu',array(
@@ -28,9 +28,30 @@ $this->breadcrumbs=array(
 				//array('label'=>'Team Options', 'url'=>array('team/index')),
 				//array('label'=>'User Management', 'url'=>array('user/index')),
 				*/
-				array('label'=>'Family Report', 'url'=>array('report/rpt1')),
-				array('label'=>'District / Family Report', 'url'=>array('report/rpt2')),
+				//array('label'=>'Family Report', 'url'=>array('report/rpt1')),
+				//array('label'=>'District / Family Report', 'url'=>array('report/rpt2')),
 				
 			),
 		)); ?>
+		
+		
+		<?php 
+		
+		$content1 =  CHtml::link('Family Report',array('report/rpt1'));
+		$content2 =  CHtml::link('District / Family Report',array('report/rpt2'));
+		
+		
+		$this->widget('bootstrap.widgets.TbTabs', array(
+    'type'=>'tabs',
+    'placement'=>'left', // 'above', 'right', 'below' or 'left'
+    'tabs'=>array(
+        array('label'=>'Family Reports', 'content'=>$content1, 'active'=>true),
+        
+       
+        
+        
+        array('label'=>'People Reports', 'content'=>$content2 ),
+        array('label'=>'Team Reports', 'content'=>'<p>What up girl, this is Section 3.</p>'),
+    ),
+)); ?>
 </div>
