@@ -3,6 +3,8 @@
 // uncomment the following to define a path alias
 // Yii::setPathOfAlias('local','path/to/local-folder');
 
+Yii::setPathOfAlias('bootstrap', dirname(__FILE__).'/../extensions/bootstrap');// added for the bootstrap extension
+
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
 return array(
@@ -10,15 +12,7 @@ return array(
 	'name'=>'Church Membership Management',
 
 	// preloading 'log' component
-	'preload'=>array(
-		'log',
-		php_sapi_name() !== 'cli'
-		?  'bootstrap'
-		: '',
-		  //this is added for the bootstrap extension
-		  //https://bitbucket.org/Crisu83/yii-bootstrap/issue/16/unit-testing-broken-due-to-wrong-assets
-		  //this is a workaround because the bootstrap extension breaks the unit testing
-		),
+	'preload'=>array('log'),
 
 	// autoloading model and component classes
 	'import'=>array(
@@ -49,7 +43,8 @@ return array(
 		),
 
 		'bootstrap'=>array(
-			'class'=>'ext.bootstrap.components.Bootstrap',  //bootstrap extension
+			//'class'=>'ext.bootstrap.components.Bootstrap',  //bootstrap extension
+			'class'=>'bootstrap.components.Bootstrap',
 		),
 		// uncomment the following to enable URLs in path-format
 		/*
@@ -108,5 +103,6 @@ return array(
 		'adminEmail'=>'webmaster@example.com',
 	),
 	'theme'=>'cdbtheme',
+	//'theme'=>'bootstrap', // requires you to copy the theme under your themes directory
 
 );
