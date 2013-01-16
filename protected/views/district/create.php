@@ -5,8 +5,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List District', 'url'=>array('index')),
-	array('label'=>'Manage District', 'url'=>array('admin')),
+	array('label'=>'List District','url'=>array('index')),
+	array('label'=>'Manage District','url'=>array('admin')),
 );
 ?>
 
